@@ -1,0 +1,25 @@
+{
+  "name": "microservice",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.1.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.5",
+    "globals": "^17.4.0",
+    "prettier": "^3.8.1"
+  },
+  "scripts": {
+    "dev:user": "pnpm -C apps/user-service dev",
+    "dev:product": "pnpm -C apps/product-service dev",
+    "dev:gateway": "pnpm -C apps/api-gateway dev",
+    "lint": "eslint \"apps/**/*.js\"",
+    "lint:fix": "eslint \"apps/**/*.js\" --fix",
+    "format": "prettier \"**/*.{js,json,md,yml,yaml}\" --write",
+    "format:check": "prettier \"**/*.{js,json,md,yml,yaml}\" --check"
+  },
+  "author": "f00hy",
+  "packageManager": "pnpm@10.33.0"
+}
