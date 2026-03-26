@@ -70,7 +70,7 @@ export async function getUserById(req, res) {
 
     const user = await User.findById(userId);
     if (!user) {
-      return res.status(404).send();
+      return res.status(404).send('User not found');
     }
 
     return res.send(stripPassword(user));
@@ -102,7 +102,7 @@ export async function updateUser(req, res) {
       runValidators: true,
     });
     if (!user) {
-      return res.status(404).send();
+      return res.status(404).send('User not found');
     }
 
     return res.send(stripPassword(user));
@@ -120,7 +120,7 @@ export async function deleteUser(req, res) {
 
     const user = await User.findByIdAndDelete(userId);
     if (!user) {
-      return res.status(404).send();
+      return res.status(404).send('User not found');
     }
 
     return res.send(stripPassword(user));
