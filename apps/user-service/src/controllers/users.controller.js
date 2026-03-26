@@ -30,7 +30,7 @@ function stripPassword(user) {
   return rest;
 }
 
-function isMongoCastError(error) {
+function isBadRequestError(error) {
   return (
     error &&
     (error.name === 'CastError' ||
@@ -57,7 +57,7 @@ export async function createUser(req, res) {
     const savedUser = await user.save();
     return res.status(201).send(stripPassword(savedUser));
   } catch (error) {
-    return res.status(isMongoCastError(error) ? 400 : 500).send(error);
+    return res.status(isBadRequestError(error) ? 400 : 500).send(error);
   }
 }
 
@@ -75,7 +75,7 @@ export async function getUserById(req, res) {
 
     return res.send(stripPassword(user));
   } catch (error) {
-    return res.status(isMongoCastError(error) ? 400 : 500).send(error);
+    return res.status(isBadRequestError(error) ? 400 : 500).send(error);
   }
 }
 
@@ -107,7 +107,7 @@ export async function updateUser(req, res) {
 
     return res.send(stripPassword(user));
   } catch (error) {
-    return res.status(isMongoCastError(error) ? 400 : 500).send(error);
+    return res.status(isBadRequestError(error) ? 400 : 500).send(error);
   }
 }
 
@@ -125,6 +125,6 @@ export async function deleteUser(req, res) {
 
     return res.send(stripPassword(user));
   } catch (error) {
-    return res.status(isMongoCastError(error) ? 400 : 500).send(error);
+    return res.status(isBadRequestError(error) ? 400 : 500).send(error);
   }
 }
