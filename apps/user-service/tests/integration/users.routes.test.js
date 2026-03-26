@@ -99,8 +99,8 @@ describe('User Service Routes Tests', () => {
     await request(app).get('/me').set('Authorization', `Bearer ${token}`).expect(404);
   });
 
-  // Test case for updating a user without password
-  it('PUT /me returns 400 when password is missing', async () => {
+  // Test case for updating a user with missing required fields
+  it('PUT /me returns 400 when required fields are missing', async () => {
     const app = createApp();
 
     const email = `u${Date.now()}@example.com`;
