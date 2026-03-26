@@ -33,7 +33,7 @@ describe('User Service Controller Tests', () => {
     await createUser(req, res);
 
     expect(res.status).toHaveBeenCalledWith(201);
-    expect(res.send).toHaveBeenCalled();
+    expect(res.send).toHaveBeenCalledWith(savedUser);
   });
 
   // Test case for creating a user with a validation error
