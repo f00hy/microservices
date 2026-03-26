@@ -64,10 +64,9 @@ describe('User Service Routes Tests', () => {
 
     const updated = await request(app)
       .put('/me')
-      .send({ name: 'Updated', email, password })
       .set('Authorization', `Bearer ${token}`)
+      .send({ name: 'Updated', email, password })
       .expect(200);
-
     expect(updated.body).toMatchObject({ _id: created.body._id, name: 'Updated', email });
 
     const fetched = await request(app)
