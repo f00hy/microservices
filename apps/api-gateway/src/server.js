@@ -9,7 +9,7 @@ const PORT = config.port;
 app.use(
   '/users',
   createProxyMiddleware({
-    target: config.services.user,
+    target: config.userService,
     changeOrigin: true,
     onError: (err, req, res) => {
       console.error('Error occurred while proxying request to User Service:', err);
@@ -22,7 +22,7 @@ app.use(
 app.use(
   '/products',
   createProxyMiddleware({
-    target: config.services.product,
+    target: config.productService,
     changeOrigin: true,
     onError: (err, req, res) => {
       console.error('Error occurred while proxying request to Product Service:', err);
