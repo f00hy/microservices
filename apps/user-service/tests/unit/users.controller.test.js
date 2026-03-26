@@ -44,7 +44,7 @@ describe('User Service Controller Tests', () => {
     const err = Object.assign(new Error('bad'), { name: 'ValidationError' });
     User.prototype.save = vi.fn().mockRejectedValue(err);
 
-    const req = { body: {} };
+    const req = { body: { name: 'A', email: 'a@a.com', password: 'x' } };
     const res = createRes();
 
     await createUser(req, res);
@@ -59,7 +59,7 @@ describe('User Service Controller Tests', () => {
     const { getUserById } = await import('../../src/controllers/users.controller.js');
     User.findById.mockResolvedValue(null);
 
-    const req = { params: { id: '507f1f77bcf86cd799439011' } };
+    const req = { user: { id: '507f1f77bcf86cd799439011' } };
     const res = createRes();
 
     await getUserById(req, res);
@@ -75,7 +75,10 @@ describe('User Service Controller Tests', () => {
     const updated = { _id: 'id', name: 'New' };
     User.findByIdAndUpdate.mockResolvedValue(updated);
 
-    const req = { params: { id: 'id' }, body: { name: 'New' } };
+    const req = {
+      user: { id: 'id' },
+      body: { name: 'New', email: 'new@example.com', password: 'pw' },
+    };
     const res = createRes();
 
     await updateUser(req, res);
@@ -89,7 +92,7 @@ describe('User Service Controller Tests', () => {
     const { deleteUser } = await import('../../src/controllers/users.controller.js');
     User.findByIdAndDelete.mockResolvedValue(null);
 
-    const req = { params: { id: 'id' } };
+    const req = { user: { id: 'id' } };
     const res = createRes();
 
     await deleteUser(req, res);

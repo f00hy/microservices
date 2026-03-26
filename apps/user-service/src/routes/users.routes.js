@@ -1,4 +1,5 @@
 import express from 'express';
+import { authJwt } from '../middleware/authJwt.js';
 import {
   createUser,
   deleteUser,
@@ -9,8 +10,8 @@ import {
 const router = express.Router();
 
 router.post('/', createUser);
-router.get('/:id', getUserById);
-router.put('/:id', updateUser);
-router.delete('/:id', deleteUser);
+router.get('/me', authJwt, getUserById);
+router.put('/me', authJwt, updateUser);
+router.delete('/me', authJwt, deleteUser);
 
 export default router;
