@@ -57,6 +57,7 @@ describe('User Service Controller Tests', () => {
   it('getUserById returns 404 when user not found', async () => {
     const { default: User } = await import('../../src/models/User.js');
     const { getUserById } = await import('../../src/controllers/users.controller.js');
+
     User.findById.mockResolvedValue(null);
 
     const req = { user: { id: '507f1f77bcf86cd799439011' } };
@@ -65,13 +66,14 @@ describe('User Service Controller Tests', () => {
     await getUserById(req, res);
 
     expect(res.status).toHaveBeenCalledWith(404);
-    expect(res.send).toHaveBeenCalled();
+    expect(res.send).toHaveBeenCalledWith('User not found');
   });
 
   // Test case for updating a user
   it('updateUser returns updated user', async () => {
     const { default: User } = await import('../../src/models/User.js');
     const { updateUser } = await import('../../src/controllers/users.controller.js');
+
     const updated = { _id: 'id', name: 'New' };
     User.findByIdAndUpdate.mockResolvedValue(updated);
 
@@ -90,6 +92,7 @@ describe('User Service Controller Tests', () => {
   it('deleteUser returns 404 when user not found', async () => {
     const { default: User } = await import('../../src/models/User.js');
     const { deleteUser } = await import('../../src/controllers/users.controller.js');
+
     User.findByIdAndDelete.mockResolvedValue(null);
 
     const req = { user: { id: 'id' } };
@@ -98,6 +101,6 @@ describe('User Service Controller Tests', () => {
     await deleteUser(req, res);
 
     expect(res.status).toHaveBeenCalledWith(404);
-    expect(res.send).toHaveBeenCalled();
+    expect(res.send).toHaveBeenCalledWith('User not found');
   });
 });
