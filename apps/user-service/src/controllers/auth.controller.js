@@ -20,8 +20,8 @@ export async function login(req, res) {
     return res.status(401).send('Invalid credentials');
   }
 
-  const token = jwt.sign({ id: user._id, email: user.email }, config.jwtSecret, {
-    expiresIn: config.jwtExpiresIn,
+  const token = jwt.sign({ id: user._id, email: user.email }, config.jwt.secret, {
+    expiresIn: config.jwt.expiresIn,
   });
 
   return res.json({ token });

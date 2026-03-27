@@ -15,7 +15,7 @@ export function authJwt(req, res, next) {
   }
 
   // Verifies the JWT
-  jwt.verify(token, config.jwtSecret, (err, decoded) => {
+  jwt.verify(token, config.jwt.secret, (err, decoded) => {
     if (err) {
       return res.sendStatus(403); // Forbidden
     }

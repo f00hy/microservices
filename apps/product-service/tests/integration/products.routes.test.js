@@ -24,7 +24,7 @@ describe('Product Service Routes Tests', () => {
 
   // Mock login function
   function createToken() {
-    return jwt.sign({ id: 'tester', email: 'tester@example.com' }, config.jwtSecret);
+    return jwt.sign({ id: 'tester', email: 'tester@example.com' }, config.jwt.secret);
   }
 
   // Test case for creating a product

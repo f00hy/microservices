@@ -6,12 +6,12 @@ import { createApp } from './app.js';
 const PORT = config.port;
 
 async function start() {
-  if (!config.jwtSecret) {
+  if (!config.jwt.secret) {
     throw new Error('JWT_SECRET is required to start the Product Service');
   }
 
   // Ensure DB is connected before accepting requests
-  await mongoose.connect(config.mongoUri);
+  await mongoose.connect(config.mongo);
   console.log('MongoDB connected...');
 
   const app = createApp();

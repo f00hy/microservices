@@ -2,7 +2,7 @@ import bcrypt from 'bcryptjs';
 import config from '../config.js';
 import User from '../models/User.js';
 
-const BCRYPT_SALT = config.bcryptSalt;
+const BCRYPT_SALT = config.salt;
 
 function getUserId(req, res) {
   const userId = req.user?.id;
