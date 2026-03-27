@@ -98,7 +98,7 @@ export async function updateUser(req, res) {
     };
 
     const user = await User.findByIdAndUpdate(userId, update, {
-      new: true,
+      returnDocument: 'after',
       runValidators: true,
     });
     if (!user) {

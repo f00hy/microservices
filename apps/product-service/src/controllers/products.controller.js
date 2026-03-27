@@ -48,7 +48,7 @@ export async function updateProduct(req, res) {
 
     const update = { id, name, description, price, category };
     const product = await Product.findOneAndUpdate({ id: req.params.id }, update, {
-      new: true,
+      returnDocument: 'after',
       runValidators: true,
     });
     if (!product) {

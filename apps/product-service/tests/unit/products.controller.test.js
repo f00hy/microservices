@@ -148,7 +148,7 @@ describe('Product Service Controller Tests', () => {
         price: 120,
         category: 'electronics',
       },
-      { new: true, runValidators: true },
+      { returnDocument: 'after', runValidators: true },
     );
     expect(res.send).toHaveBeenCalledWith(updated);
   });
