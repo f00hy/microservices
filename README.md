@@ -22,30 +22,30 @@ Clients call the **API gateway**, which proxies traffic to the **user and produc
 ```mermaid
 flowchart TB
   subgraph clients [Clients]
-    HTTP[HTTP_Clients]
+    HTTP[HTTP Clients]
   end
   subgraph edge [Edge]
-    GW[API_Gateway]
+    GW[API Gateway]
   end
-  subgraph registry [Service_Registry]
+  subgraph registry [Service Registry]
     C[Consul]
   end
   subgraph backends [Microservices]
-    US[User_Service]
-    PS[Product_Service]
+    US[User Service]
+    PS[Product Service]
   end
-  subgraph data [Data_Stores]
-    MU[Mongo_User]
-    MP[Mongo_Product]
+  subgraph data [Data Stores]
+    MU[Mongo User]
+    MP[Mongo Product]
   end
   HTTP --> GW
-  GW -->|"Proxy_/users"| US
-  GW -->|"Proxy_/products"| PS
+  GW -->|"Proxy /users"| US
+  GW -->|"Proxy /products"| PS
   US --> MU
   PS --> MP
   US -.->|Register| C
   PS -.->|Register| C
-  GW -->|Resolve_upstream| C
+  GW -->|Resolve upstream| C
 ```
 
 ### Request Path
@@ -55,9 +55,9 @@ For paths under `/users` or `/products`, the API gateway uses `http-proxy-middle
 ```mermaid
 sequenceDiagram
   participant Client
-  participant Gateway as API_Gateway
+  participant Gateway as API Gateway
   participant Consul
-  participant Svc as User_or_Product_Service
+  participant Svc as User or Product Service
 
   Client->>Gateway: HTTP e.g. /users/health
   Gateway->>Consul: Resolve service address
