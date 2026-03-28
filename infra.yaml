@@ -1,0 +1,58 @@
+services:
+  consul:
+    image: hashicorp/consul:1.21
+    container_name: consul
+    command: agent -dev -client=0.0.0.0
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    ports:
+      - ${CONSUL_PORT}:8500
+    networks:
+      - ms-net
+    restart: unless-stopped
+    healthcheck:
+      test: ['CMD', 'wget', '--spider', '-q', 'http://127.0.0.1:8500/v1/status/leader']
+      start_period: 10s
+      interval: 10s
+      timeout: 10s
+      retries: 5
+    deploy:
+      resources:
+        limits:
+          cpus: 0.50
+          memory: 512M
+        reservations:
+          cpus: 0.25
+          memory: 256M
+
+  mongo-user:
+    image: mongo:7
+    container_name: mongo-user
+    environment:
+      MONGO_INITDB_DATABASE: ${MONGO_USER_DB}
+    volumes:
+      - mongo-user-data:/data/db
+    networks:
+      - ms-net
+    restart: unless-stopped
+    healthcheck:
+      test: ['CMD', 'mongosh', '--quiet', '--eval', "db.adminCommand('ping')"]
+      start_period: 30s
+      interval: 10s
+      timeout: 10s
+      retries: 5
+    deploy:
+      resources:
+        limits:
+          cpus: 0.75
+          memory: 768M
+        reservations:
+          cpus: 0.25
+          memory: 256M
+
+volumes:
+  mongo-user-data:
+
+networks:
+  ms-net:
+    name: ms-net
