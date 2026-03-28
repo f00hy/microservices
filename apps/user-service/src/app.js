@@ -7,5 +7,8 @@ export function createApp() {
   app.use(express.json()); // Parse JSON requests
   app.use(authRouter);
   app.use(usersRouter);
+  app.get('/health', (req, res) => {
+    res.json({ status: 'ok' });
+  });
   return app;
 }
