@@ -29,6 +29,9 @@ importers:
 
   apps/api-gateway:
     dependencies:
+      consul:
+        specifier: ^2.0.1
+        version: 2.0.1
       dotenv:
         specifier: ^17.3.1
         version: 17.3.1
