@@ -40,7 +40,9 @@ export function createConsulRegistry() {
           timeout: '5s',
         },
       });
-      console.log(`Product Service registered with Consul at http://${SERVICE_HOST}:${SERVICE_PORT}`);
+      console.log(
+        `Product Service registered with Consul at http://${SERVICE_HOST}:${SERVICE_PORT}`,
+      );
     } catch (err) {
       console.error('Failed to register Product Service with Consul:', err);
       throw err;
