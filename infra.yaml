@@ -50,8 +50,34 @@ services:
           cpus: 0.25
           memory: 256M
 
+  mongo-product:
+    image: mongo:7
+    container_name: mongo-product
+    environment:
+      MONGO_INITDB_DATABASE: ${MONGO_PRODUCT_DB}
+    volumes:
+      - mongo-product-data:/data/db
+    networks:
+      - ms-net
+    restart: unless-stopped
+    healthcheck:
+      test: ['CMD', 'mongosh', '--quiet', '--eval', "db.adminCommand('ping')"]
+      start_period: 30s
+      interval: 10s
+      timeout: 10s
+      retries: 5
+    deploy:
+      resources:
+        limits:
+          cpus: 0.75
+          memory: 768M
+        reservations:
+          cpus: 0.25
+          memory: 256M
+
 volumes:
   mongo-user-data:
+  mongo-product-data:
 
 networks:
   ms-net:
