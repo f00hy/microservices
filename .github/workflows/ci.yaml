@@ -41,3 +41,5 @@ jobs:
 
       - name: Test
         run: pnpm -r run test
+        env:
+          JWT_SECRET: test-jwt-secret
