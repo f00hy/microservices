@@ -6,6 +6,7 @@ An Express.js monorepo that demonstrates microservices architecture: API gateway
 
 - [Architecture](#architecture)
   - [Request Path](#request-path)
+- [API Documentation](docs/api.md)
 - [Design Decisions](#design-decisions)
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
